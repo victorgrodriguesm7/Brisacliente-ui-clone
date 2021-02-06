@@ -19,19 +19,19 @@ class LoginBoxButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
           side: BorderSide(
-            color: isInverted ? Color(0xFFf26a0f) : Colors.transparent
+            color: isInverted ? Color(0xFFf46e27) : Colors.transparent
           )
         ),
         elevation: 0,
         child: Text(
           text,
           style: TextStyle(
-             color: isInverted ? Color(0xFFf26a0f) : Colors.white,
+             color: isInverted ? Color(0xFFf46e27) : Colors.white,
              fontWeight: FontWeight.w300
           ),
         ),
         onPressed: onPressed,
-        color: isInverted ? Colors.white : Color(0xFFf26a0f),
+        color: isInverted ? Colors.white : Color(0xFFf46e27),
       ),
     );
   }
