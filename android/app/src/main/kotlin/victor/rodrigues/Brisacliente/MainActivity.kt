@@ -1,4 +1,4 @@
-package com.example.Brisacliente
+package victor.rodrigues.Brisacliente
 
 import io.flutter.embedding.android.FlutterActivity
 
