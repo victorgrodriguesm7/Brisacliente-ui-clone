@@ -47,11 +47,11 @@ class _LoginPageState extends State<LoginPage> {
                       )
                   ),
                   LoginBox(
-                    height: height * 0.32,
                     type: "column",
                     children: [
                       LoginForm(
                         client: this.controller.client,
+                        cpfValidator: this.controller.validateCpf
                       )
                     ],
                   ),
