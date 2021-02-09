@@ -14,17 +14,27 @@ abstract class _ClientBase with Store {
   String cpf;
   @action
   changeCpf(String value){
-    if (cpf != null){
-      if (cpf.length == 2 && value.length == 3 ||
-          cpf.length == 6 && value.length == 7){
-        cpf = value + ".";
-      }else if (cpf.length == 10 && value.length == 11){
-        cpf = value + "-";
+    this.cpf = addMask(value);
+  }
+
+  String addMask(String cpf){
+    var cpfWithMask = "";
+    RegExp exp = new RegExp(r"\d");
+    List<String> digits = exp.allMatches(cpf)
+      .map((m) => 
+          m.group(0)
+      ).toList();
+    
+    for (var i = 0;i < digits.length; i++){
+      if (i == 2 && this.cpf.length <= cpf.length || i == 5 && this.cpf.length <= cpf.length){
+        cpfWithMask += digits[i] + ".";
+      }else if (i == 8 && this.cpf.length <= cpf.length){
+        cpfWithMask += digits[i] + "-";
       }else {
-        cpf = value;
+        cpfWithMask += digits[i];
       }
-    }else {
-      cpf = value;
     }
+    
+    return cpfWithMask;
   }
 }
