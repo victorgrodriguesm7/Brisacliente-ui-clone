@@ -3,6 +3,7 @@ import 'package:Brisacliente/src/components/LoginBoxButton/LoginBoxButton.dart';
 import 'package:Brisacliente/src/components/LoginBoxText/LoginBoxText.dart';
 import 'package:Brisacliente/src/components/LoginBoxTitle/LoginBoxTitle.dart';
 import 'package:Brisacliente/src/controllers/LoginPageController.dart';
+import 'package:Brisacliente/src/pages/GuestPage.dart';
 import 'package:flutter/material.dart';
 import '../components/LoginForm/LoginForm.dart';
 
@@ -51,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       LoginForm(
                         client: this.controller.client,
-                        cpfValidator: this.controller.validateCpf
+                        cpfValidator: this.controller.client.validateCpf
                       )
                     ],
                   ),
@@ -72,7 +73,14 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       LoginBoxButton(
                         text: "ACESSAR",
-                        onPressed: () => {}
+                        onPressed: (){
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => GuestPage()
+                            ),
+                          );
+                        }
                       )
                     ],
                   ),
