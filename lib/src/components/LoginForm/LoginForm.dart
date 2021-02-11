@@ -23,7 +23,8 @@ class _LoginFormState extends State<LoginForm> {
     double topPadding = height * 0.03;
     return Padding(
       padding: EdgeInsets.only(
-          left: sidePadding, right: sidePadding, top: topPadding),
+          left: sidePadding, right: sidePadding, top: topPadding
+      ),
       child: Container(
         child: Form(
           key: _formKey,
@@ -34,8 +35,34 @@ class _LoginFormState extends State<LoginForm> {
                   return TextFormField(
                     decoration: InputDecoration(
                       labelText: "E-Mail",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(13)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(13),
+                          borderSide: BorderSide(
+                            color: Color(0xFF093d93),
+                            width: 1.2
+                          )
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(13),
+                          borderSide: BorderSide(
+                            color: Color(0xFF093d93),
+                            width: 1.8
+                          )
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(13),
+                        borderSide: BorderSide(
+                          color: Color(0xFFf20505),
+                          width: 1.8
+                        )
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(13),
+                        borderSide: BorderSide(
+                          color: Color(0xFFf20505),
+                          width: 1.8
+                        )
+                      ),
                     ),
                     onChanged: this.widget.client.changeEmail,
                   );
@@ -51,8 +78,34 @@ class _LoginFormState extends State<LoginForm> {
                   return TextFormField(
                     decoration: InputDecoration(
                       labelText: "CPF",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(13)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(13),
+                          borderSide: BorderSide(
+                            color: Color(0xFF093d93),
+                            width: 1.2
+                          )
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(13),
+                          borderSide: BorderSide(
+                            color: Color(0xFF093d93),
+                            width: 1.8
+                          )
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(13),
+                        borderSide: BorderSide(
+                          color: Color(0xFFf20505),
+                          width: 1.8
+                        )
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(13),
+                        borderSide: BorderSide(
+                          color: Color(0xFFf20505),
+                          width: 1.8
+                        )
+                      ),
                     ),
                     controller: controller,
                     validator: this.widget.cpfValidator,
