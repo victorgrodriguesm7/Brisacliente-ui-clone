@@ -3,6 +3,7 @@ import 'package:Brisacliente/src/components/LoginBoxButton/LoginBoxButton.dart';
 import 'package:Brisacliente/src/components/LoginBoxText/LoginBoxText.dart';
 import 'package:Brisacliente/src/components/LoginBoxTitle/LoginBoxTitle.dart';
 import 'package:Brisacliente/src/controllers/LoginPageController.dart';
+import 'package:Brisacliente/src/pages/FirstAccessPage.dart';
 import 'package:Brisacliente/src/pages/GuestPage.dart';
 import 'package:flutter/material.dart';
 import '../components/LoginForm/LoginForm.dart';
@@ -102,7 +103,14 @@ class _LoginPageState extends State<LoginPage> {
                       LoginBoxButton(
                         text: "ACESSAR",
                         isInverted: true,
-                        onPressed: () => {}
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FirstAcessPage()
+                            ),
+                          );
+                        }
                       )
                     ],
                   ),
