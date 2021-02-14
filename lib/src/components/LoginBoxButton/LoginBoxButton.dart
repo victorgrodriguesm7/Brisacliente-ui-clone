@@ -4,8 +4,9 @@ class LoginBoxButton extends StatelessWidget {
   final String text;
   final Function onPressed;
   final bool isInverted;
+  final bool isEnabled;
   final double width;
-  const LoginBoxButton({Key key, this.text, this.onPressed, this.isInverted: false, this.width}) : super(key: key);
+  const LoginBoxButton({Key key, this.text, this.onPressed, this.isInverted: false, this.isEnabled: true, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class LoginBoxButton extends StatelessWidget {
              fontWeight: FontWeight.w300
           ),
         ),
-        onPressed: onPressed,
+        onPressed: isEnabled ? onPressed : () => {},
         color: isInverted ? Colors.white : Color(0xFFf46e27),
       ),
     );
