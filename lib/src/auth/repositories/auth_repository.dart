@@ -5,20 +5,30 @@ class AuthRepository implements IAuthRepository{
   final FirebaseAuth auth = FirebaseAuth.instance;
   
   @override
-  Future getUser() {
-    // TODO: implement getUser
-    throw UnimplementedError();
+  Future<User> getUser() async {
+    return await auth.currentUser;
   }
 
   @override
-  Future getEmailPasswordLogin() {
-    // TODO: implement getEmailPasswordLogin
-    throw UnimplementedError();
+  Future<User> getEmailPasswordLogin(String email, String password) async {
+    UserCredential userCredential = await auth.signInWithEmailAndPassword(
+      email: email, 
+      password: password
+    );
+
+    final User user = userCredential.user;
+
+    return user;
   }
 
   @override
   Future<String> getToken() {
     // TODO: implement getToken
     throw UnimplementedError();
+  }
+
+  @override
+  Future getLogout() async {
+    await auth.signOut();
   }
 }
