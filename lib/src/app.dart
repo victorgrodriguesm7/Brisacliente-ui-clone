@@ -1,3 +1,7 @@
+import 'package:Brisacliente/src/pages/ContractPages/AcceptContractPage.dart';
+import 'package:Brisacliente/src/pages/ContractPages/WelcomePage.dart';
+import 'package:Brisacliente/src/pages/ContractPages/DocumentPage.dart';
+import 'package:Brisacliente/src/pages/ContractPages/SelfiePage.dart';
 import 'package:Brisacliente/src/pages/FirstAccessPage.dart';
 import 'package:Brisacliente/src/pages/GuestPage.dart';
 import 'package:Brisacliente/src/pages/LoginPage.dart';
@@ -28,6 +32,10 @@ class App extends StatelessWidget {
       routes: {
         "/" : (context) => initPage(context, LoginPage()),
         "/guestpage": (context) =>  initPage(context,GuestPage()),
+        "/contract": (context) => initPage(context, WelcomePage()),
+        "/contract/documents": (context) => initPage(context, DocumentPage()),
+        "/contract/selfie": (context) => initPage(context, SelfiePage()),
+        "/contract/accept": (context) => initPage(context, AcceptContractPage()),
         "/firstaccess" : (context) =>  initPage(context, FirstAcessPage())
       }
     );
