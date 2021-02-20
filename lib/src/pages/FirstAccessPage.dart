@@ -1,4 +1,5 @@
 import 'package:Brisacliente/src/components/LoginBox/LoginBox.dart';
+import 'package:Brisacliente/src/components/RoundedAppBar/RoundedAppBar.dart';
 import 'package:Brisacliente/src/controllers/FirstAccessController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -19,24 +20,7 @@ class _FirstAcessPageState extends State<FirstAcessPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(30.0)
-          )
-        ),
-        backgroundColor: Color(0xFF093d93),
-        title: Text(
-          "Brisacliente", 
-          style: TextStyle(
-            fontSize: 30,
-            color: Colors.white,
-            fontWeight: FontWeight.w500
-          ),
-          textAlign: TextAlign.center,
-        ),
-        centerTitle: true,
-      ),
+      appBar: RoundedAppBar(),
       backgroundColor: Color(0xFFecf0f1),
       body: Column(
         children: [
