@@ -1,4 +1,7 @@
+import 'package:Brisacliente/src/components/GuestButton/GuestButton.dart';
+import 'package:Brisacliente/src/components/LoginBoxButton/LoginBoxButton.dart';
 import 'package:Brisacliente/src/controllers/GuestPageController.dart';
+import 'package:Brisacliente/src/repositories/GuestRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -48,6 +51,18 @@ class _GuestPageState extends State<GuestPage> {
             ),
             Column(
               children: [
+                Observer(builder: (context){
+                  return controller.loading ? 
+                  Padding(
+                    padding: EdgeInsets.only(bottom: height * 0.15),
+                    child: SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: CircularProgressIndicator()
+                    ),
+                  ) : 
+                  SizedBox();
+                }),
                 Row(
                   children: [
                     Text("Olá, Digite seu documento",
@@ -64,6 +79,7 @@ class _GuestPageState extends State<GuestPage> {
                           TextPosition(offset: controller.text.length)
                       );
                       return TextFormField(
+                            keyboardType: TextInputType.number,
                             style: TextStyle(fontSize: 30, color: Colors.white),
                             decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
@@ -85,42 +101,96 @@ class _GuestPageState extends State<GuestPage> {
                   child: SizedBox(
                     width: width,
                     height: height * 0.06,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Text(
-                        "Prosseguir",
-                        style: TextStyle(
-                          color: Color(0xFF093d93),
-                          fontWeight: FontWeight.w400
-                        ),
-                      ), 
-                      onPressed: (){
-                        _formKey.currentState.validate();
-                      }
+                    child: GuestButton(
+                      text: "Prosseguir",
+                      isInverted: false,
+                      onPressed:  () async {
+                        if(_formKey.currentState.validate()){
+                          if (await controller.isContractNotAccepted()){
+                            Navigator.pushNamed(
+                              context,
+                              "/contract",
+                              arguments: controller
+                            );
+                          }else{
+                          Widget dialog = AlertDialog(
+                              contentPadding: EdgeInsets.only(left: 7.0, bottom: 10),
+                              titlePadding: EdgeInsets.only(left: 7.0, top: 15, bottom: 25),
+                              title: Row(
+                                children: [
+                                  Icon(
+                                    Icons.warning,
+                                    color: Color(0xFFf46e27),
+                                    size: 30
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 5),
+                                    child: Text("Ops", 
+                                      style: TextStyle(
+                                        color: Color(0xFF093d93)
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              content: Container(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 15, bottom: 15),
+                                      child: Text(
+                                          controller.error,
+                                          style: TextStyle(
+                                            color: Color(0xFF093d93)
+                                          ),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: LoginBoxButton(
+                                              isInverted: true, 
+                                              text: "Cancelar",
+                                              onPressed: () => Navigator.of(context).pop()
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: LoginBoxButton( 
+                                              text: "Ir para o Login",
+                                              onPressed: () => Navigator.pushReplacementNamed(context, "/")
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+
+                            showDialog(
+                              context: context,
+                              builder: (context) => dialog
+                            );
+                          }
+                        }  
+                      },
                     ),
                   ),
                 ),
                 SizedBox(
                   width: width,
                   height: height * 0.06,
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      side: BorderSide(
-                        color: Color(0xFF5376ae),
-                        width: 1
-                      )
-                    ),
-                    color: Color(0xFF093d93),
-                    child: Text(
-                      "Voltar",
-                      style: TextStyle(
-                        color: Color(0xFF5376ae),
-                        fontWeight: FontWeight.w400
-                      ),
-                    ),
+                  child: GuestButton(
+                    text: "Voltar",
+                    isInverted: true,
                     onPressed: () => Navigator.pop(context)
                   ),
                 )
