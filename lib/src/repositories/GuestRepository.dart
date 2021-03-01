@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:Brisacliente/src/models/contract.dart';
 import 'package:Brisacliente/src/repositories/interfaces/GuestRepository_Interface.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:mobx/mobx.dart';
 
 class GuestRepository implements IGuestRepository{
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -47,8 +49,28 @@ class GuestRepository implements IGuestRepository{
   }
 
   @override
-  Future<Uri> sendDocuments(List<File> images) {
-    throw UnimplementedError();
-  }
+  Future<bool> sendDocuments(ObservableMap<String, File> images, String cpf) async {
+    try {
+      for (String name in images.keys) {
+        UploadTask uploadTask;
+        Reference ref = FirebaseStorage.instance
+            .ref()
+            .child('$cpf')
+            .child('/$name.jpg');
 
+        final metadata = SettableMetadata(
+            contentType: 'image/jpeg',
+        );
+
+        uploadTask = ref.putFile(images[name], metadata);
+
+        await uploadTask.whenComplete(() => null);
+        print('$name enviado');
+      }
+    } catch (e) {
+      return false;
+    }
+    
+    return true;
+  }
 }
