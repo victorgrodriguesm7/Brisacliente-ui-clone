@@ -81,4 +81,21 @@ abstract class _GuestPageControllerBase with Store {
       await _guestRepository.getContracts()
     );
   }
+
+  Future<Map<String,Map<String,String>>> finish() async {
+    if (await _guestRepository.sendDocuments(this._images, this.client.cpf)){     
+      return {
+        "Successfully" : { 
+          "title" : "Documentos enviados com sucesso",
+          "text" : "Por favor aguarde até que um atendente verifique seus documentos e entre em contato"
+        }
+      };
+    }
+
+    return {
+      "Error": {
+        "text" : "Por favor tente novamente"
+      }
+    };
+  }
 }
