@@ -1,6 +1,9 @@
 import 'package:Brisacliente/src/components/ContractWidget/ContractWidget.dart';
 import 'package:Brisacliente/src/components/GuestButton/GuestButton.dart';
+import 'package:Brisacliente/src/components/LoadingDialog/LoadingDialog.dart';
 import 'package:Brisacliente/src/components/RoundedAppBar/RoundedAppBar.dart';
+import 'package:Brisacliente/src/components/SucessfullyDialog/SucessfullyDialog.dart';
+import 'package:Brisacliente/src/components/WarningDialog/WarningDialog.dart';
 import 'package:Brisacliente/src/controllers/GuestPageController.dart';
 import 'package:Brisacliente/src/models/contract.dart';
 import 'package:flutter/material.dart';
@@ -75,11 +78,11 @@ class _AcceptContractPageState extends State<AcceptContractPage> {
                 }
               ),
               Padding(
-                padding: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.only(top: 20),
                 child: Column(
                   children: [
                     Observer(builder: (_) {
-                      bool isContractsAccepted = true;
+                      bool isContractsAccepted = controller.contracts.isEmpty ? false : true;
                       for (Contract contract in controller.contracts) {
                         isContractsAccepted &= contract.isAccepted;
                       }
@@ -92,8 +95,35 @@ class _AcceptContractPageState extends State<AcceptContractPage> {
                             notInvertedBackgroundColor: Color(0xFF093d93),
                             notInvertedTextColor: Colors.white,
                             text: "Finalizar",
-                            onPressed: () => {
-                              
+                            onPressed: () async {
+                              showDialog(
+                                context: context,
+                                builder: (context) => FutureBuilder(
+                                  future: controller.finish(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState == ConnectionState.done){
+                                      Map<String, Map<String,String>> data = Map<String, Map<String,String>>.from(snapshot.data);
+                                      if (data.containsKey("Successfully")){
+                                        var title = data["Successfully"]["title"];
+                                        var message =  data["Successfully"]["text"];
+                                        return SucessfullyDialog(
+                                          title: title,
+                                          message: message,
+                                          buttonText: "Ir para o Login",
+                                          buttonFunction: () => Navigator.popAndPushNamed(context, "/"),
+                                        );
+                                      }
+                                      var message = data["Error"]["text"];
+                                      return WarningDialog(
+                                        error: message,
+                                        redirectText: "Voltar",
+                                        redirectFunction: () => Navigator.pop(context),
+                                      );
+                                    }
+                                    return LoadingDialog();
+                                  },
+                                )
+                              );
                             },
                           ),
                         ),
