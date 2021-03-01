@@ -1,7 +1,6 @@
 import 'package:Brisacliente/src/components/GuestButton/GuestButton.dart';
-import 'package:Brisacliente/src/components/LoginBoxButton/LoginBoxButton.dart';
+import 'package:Brisacliente/src/components/WarningDialog/WarningDialog.dart';
 import 'package:Brisacliente/src/controllers/GuestPageController.dart';
-import 'package:Brisacliente/src/repositories/GuestRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -57,11 +56,14 @@ class _GuestPageState extends State<GuestPage> {
                     padding: EdgeInsets.only(bottom: height * 0.15),
                     child: SizedBox(
                       width: 100,
-                      height: 100,
+                      height: 80,
                       child: CircularProgressIndicator()
                     ),
                   ) : 
-                  SizedBox();
+                  SizedBox(
+                    width: 100,
+                    height: 80,
+                  );
                 }),
                 Row(
                   children: [
@@ -113,66 +115,10 @@ class _GuestPageState extends State<GuestPage> {
                               arguments: controller
                             );
                           }else{
-                          Widget dialog = AlertDialog(
-                              contentPadding: EdgeInsets.only(left: 7.0, bottom: 10),
-                              titlePadding: EdgeInsets.only(left: 7.0, top: 15, bottom: 25),
-                              title: Row(
-                                children: [
-                                  Icon(
-                                    Icons.warning,
-                                    color: Color(0xFFf46e27),
-                                    size: 30
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 5),
-                                    child: Text("Ops", 
-                                      style: TextStyle(
-                                        color: Color(0xFF093d93)
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              content: Container(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 15, bottom: 15),
-                                      child: Text(
-                                          controller.error,
-                                          style: TextStyle(
-                                            color: Color(0xFF093d93)
-                                          ),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: LoginBoxButton(
-                                              isInverted: true, 
-                                              text: "Cancelar",
-                                              onPressed: () => Navigator.of(context).pop()
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: LoginBoxButton( 
-                                              text: "Ir para o Login",
-                                              onPressed: () => Navigator.pushReplacementNamed(context, "/")
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
+                            Widget dialog = WarningDialog(
+                              error: controller.error,
+                              redirectText: "Ir para o Login",
+                              redirectFunction: () => Navigator.pushReplacementNamed(context, "/"),
                             );
 
                             showDialog(
