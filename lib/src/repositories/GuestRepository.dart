@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:mobx/mobx.dart';
 
-class GuestRepository implements IGuestRepository{
+class GuestRepository implements IGuestRepository {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   List<Contract> contracts = [];
   Map<String, dynamic> data;
@@ -20,8 +20,11 @@ class GuestRepository implements IGuestRepository{
   @override
   Future<List<Contract>> getContracts() async {
     contracts = [];
-    for (DocumentReference contractReference in data["contracts"]){
-      var doc = await firestore.collection("Contracts").doc(contractReference.id).get();
+    for (DocumentReference contractReference in data["contracts"]) {
+      var doc = await firestore
+          .collection("Contracts")
+          .doc(contractReference.id)
+          .get();
       String title = doc.data()["title"];
       String type = doc.data()["type"];
       var contract = Contract(title, type);
@@ -35,9 +38,12 @@ class GuestRepository implements IGuestRepository{
   @override
   Future<bool> isContractsNotAccepted(String cpf) async {
     print("Contratos não aceitos");
-    var docs = await firestore.collection("ContractsNotAccepted")
-      .where("cpf",isEqualTo:  cpf).limit(1).get();
-    if (docs.docs.isEmpty){
+    var docs = await firestore
+        .collection("ContractsNotAccepted")
+        .where("cpf", isEqualTo: cpf)
+        .limit(1)
+        .get();
+    if (docs.docs.isEmpty) {
       return false;
     }
 
@@ -59,18 +65,17 @@ class GuestRepository implements IGuestRepository{
             .child('/$name.jpg');
 
         final metadata = SettableMetadata(
-            contentType: 'image/jpeg',
+          contentType: 'image/jpeg',
         );
 
         uploadTask = ref.putFile(images[name], metadata);
 
         await uploadTask.whenComplete(() => null);
-        print('$name enviado');
       }
     } catch (e) {
       return false;
     }
-    
+
     return true;
   }
 }
