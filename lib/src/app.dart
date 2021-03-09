@@ -4,6 +4,7 @@ import 'package:Brisacliente/src/pages/ContractPages/DocumentPage.dart';
 import 'package:Brisacliente/src/pages/ContractPages/SelfiePage.dart';
 import 'package:Brisacliente/src/pages/FirstAccessPage.dart';
 import 'package:Brisacliente/src/pages/GuestPage.dart';
+import 'package:Brisacliente/src/pages/HomePage.dart';
 import 'package:Brisacliente/src/pages/LoginPage.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +37,8 @@ class App extends StatelessWidget {
         "/contract/documents": (context) => initPage(context, DocumentPage()),
         "/contract/selfie": (context) => initPage(context, SelfiePage()),
         "/contract/accept": (context) => initPage(context, AcceptContractPage()),
-        "/firstaccess" : (context) =>  initPage(context, FirstAcessPage())
+        "/firstaccess" : (context) =>  initPage(context, FirstAcessPage()),
+        "/home" : (context) => initPage(context, HomePage()),
       }
     );
   }
