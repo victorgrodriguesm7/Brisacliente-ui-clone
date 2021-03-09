@@ -31,55 +31,80 @@ class _LoginFormState extends State<LoginForm> {
               Observer(
                 builder: (_) {
                   return TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "E-Mail",
-                      enabledBorder: OutlineInputBorder(
+                      decoration: InputDecoration(
+                        labelText: "E-Mail",
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(13),
-                          borderSide:
-                              BorderSide(color: Color(0xFF093d93), width: 1.2)),
-                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF093d93),
+                            width: 1.2
+                          )
+                        ),
+                        focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(13),
-                          borderSide:
-                              BorderSide(color: Color(0xFF093d93), width: 1.8)),
-                      errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF093d93),
+                            width: 1.8
+                          )
+                        ),
+                        errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(13),
-                          borderSide:
-                              BorderSide(color: Color(0xFFf20505), width: 1.8)),
-                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFFf20505),
+                            width: 1.8
+                          )
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(13),
-                          borderSide:
-                              BorderSide(color: Color(0xFFf20505), width: 1.8)),
-                    ),
-                    onChanged: this.widget.controller.client.changeEmail
-                  );
+                          borderSide: BorderSide(
+                            color: Color(0xFFf20505),
+                            width: 1.8
+                          )
+                        ),
+                      ),
+                      onChanged: this.widget.controller.client.changeEmail);
                 },
               ),
               Padding(
                 padding: EdgeInsets.only(top: topPadding),
                 child: Observer(builder: (_) {
                   var controller = TextEditingController(
-                      text: this.widget.controller.client.cpf);
+                      text: this.widget.controller.client.cpf
+                  );
                   controller.selection = TextSelection.fromPosition(
-                      TextPosition(offset: controller.text.length));
+                      TextPosition(offset: controller.text.length)
+                  );
                   return TextFormField(
                     decoration: InputDecoration(
                       labelText: "CPF",
                       enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(13),
-                          borderSide:
-                              BorderSide(color: Color(0xFF093d93), width: 1.2)),
+                        borderRadius: BorderRadius.circular(13),
+                        borderSide: BorderSide(
+                          color: Color(0xFF093d93),
+                          width: 1.2
+                        )
+                      ),
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(13),
-                          borderSide:
-                              BorderSide(color: Color(0xFF093d93), width: 1.8)),
+                        borderRadius: BorderRadius.circular(13),
+                        borderSide: BorderSide(
+                          color: Color(0xFF093d93),
+                          width: 1.2
+                        )
+                      ),
                       errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(13),
-                          borderSide:
-                              BorderSide(color: Color(0xFFf20505), width: 1.8)),
+                        borderRadius: BorderRadius.circular(13),
+                        borderSide: BorderSide(
+                          color: Color(0xFF093d93),
+                          width: 1.2
+                        )
+                      ),
                       focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(13),
-                          borderSide:
-                              BorderSide(color: Color(0xFFf20505), width: 1.8)),
+                        borderRadius: BorderRadius.circular(13),
+                        borderSide: BorderSide(
+                          color: Color(0xFF093d93),
+                          width: 1.2
+                        )
+                      ),
                     ),
                     controller: controller,
                     validator: this.widget.controller.client.validateCpf,
@@ -95,17 +120,19 @@ class _LoginFormState extends State<LoginForm> {
                 }),
               ),
               Observer(
-                builder: (_){
-                return Padding(
-                    padding: EdgeInsets.only(top: topPadding, bottom: topPadding),
+                builder: (_) {
+                  return Padding(
+                    padding:
+                        EdgeInsets.only(top: topPadding, bottom: topPadding),
                     child: LoginBoxButton(
                       width: width,
                       text: "Entrar",
-                      onPressed: () {
-                        if (_formKey.currentState.validate()){
-                          this.widget.controller.login(
-                            this.widget.controller.client.email,
-                            this.widget.controller.client.cpf
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          await this.widget.controller.login(
+                              this.widget.controller.client.email,
+                              this.widget.controller.client.cpf,
+                              context
                           );
                         }
                       },
@@ -114,16 +141,13 @@ class _LoginFormState extends State<LoginForm> {
                   );
                 },
               ),
-              Observer(
-                builder: (_){
-                  return SizedBox(
+              Observer(builder: (_) {
+                return SizedBox(
                     height: this.widget.controller.error.length > 0 ? height * 0.05 : 0,
                     child: Text(
                       this.widget.controller.error,
-                      style: TextStyle(
-                        color: Colors.red
-                        ),
-                      )
+                      style: TextStyle(color: Colors.red),
+                    )
                   );
                 }
               )
