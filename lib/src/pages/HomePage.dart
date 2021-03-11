@@ -1,3 +1,4 @@
+import 'package:Brisacliente/src/components/FinancialTab/FinancialTab.dart';
 import 'package:Brisacliente/src/components/PlansTab/PlansTab.dart';
 import 'package:Brisacliente/src/components/StartTab/StartTab.dart';
 import 'package:Brisacliente/src/controllers/HomePageController.dart';
@@ -29,8 +30,8 @@ class _HomePageState extends State<HomePage> {
               PlansTab(
                 controller: controller
               ),
-              Container(
-                color: Colors.lightGreen,
+              FinancialTab(
+                controller: controller
               ),
               Container(
                 color: Colors.red,
