@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 class Plan {
   String title;
   String type;
+  double price;
   List<Map<String, dynamic>> options;
 
-  Plan(this.title, String type, List<Map<String, dynamic>> options) {
+  Plan({
+      this.title,
+      this.price,
+      String type,
+      List<Map<String, dynamic>> options
+    }) {
     switch (type) {
       case "phone":
         this.type = "Telefone";
