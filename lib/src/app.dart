@@ -1,3 +1,4 @@
+import 'package:Brisacliente/src/pages/BillsPage.dart';
 import 'package:Brisacliente/src/pages/ContractPages/AcceptContractPage.dart';
 import 'package:Brisacliente/src/pages/ContractPages/WelcomePage.dart';
 import 'package:Brisacliente/src/pages/ContractPages/DocumentPage.dart';
@@ -39,6 +40,7 @@ class App extends StatelessWidget {
         "/contract/accept": (context) => initPage(context, AcceptContractPage()),
         "/firstaccess" : (context) =>  initPage(context, FirstAcessPage()),
         "/home" : (context) => initPage(context, HomePage()),
+        "/bills": (context) => initPage(context, BillsPage()),
       }
     );
   }
