@@ -27,13 +27,25 @@ class PlansRepository implements IPlansRepository {
           .doc(contractReference.id)
           .get();
       var contractData = doc.data();
-      
+
       List<Map<String, dynamic>> options =
           List<Map<String, dynamic>>.from(contractData["options"]);
       String type = contractData["type"];
       String title = contractData["title"];
+      double price = double.parse(
+        int.parse(
+          contractData["price"].toString()
+        ).toStringAsPrecision(2)
+      );
 
-      plans.add(Plan(title, type, options));
+      plans.add(
+        Plan(
+          title:title, 
+          price: price,
+          type: type,
+          options: options
+        )
+      );
     }
 
     return plans;
