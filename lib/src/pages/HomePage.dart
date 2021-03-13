@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
             physics: NeverScrollableScrollPhysics(),
             children: [
               StartTab(
-                username: controller.getUserName()
+                controller: controller
               ),
               PlansTab(
                 controller: controller
