@@ -1,12 +1,13 @@
 import 'package:Brisacliente/src/components/FastAccessOptions/FastAccessOptions.dart';
 import 'package:Brisacliente/src/components/SupportOptions/SupportOptions.dart';
+import 'package:Brisacliente/src/controllers/HomePageController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class StartTab extends StatefulWidget {
-  final String username;
+  final HomePageController controller;
 
-  const StartTab({Key key, this.username}) : super(key: key);
+  const StartTab({Key key, this.controller}) : super(key: key);
   @override
   _StartTabState createState() => _StartTabState();
 }
@@ -46,7 +47,7 @@ class _StartTabState extends State<StartTab> {
               Padding(
                 padding: EdgeInsets.only(top: height * 0.025),
                 child: Text(
-                  "Olá, ${this.widget.username}!",
+                  "Olá, ${this.widget.controller.getUserName()}!",
                   style: TextStyle(
                     color: Color(0xFF062a66), 
                     fontSize: 30,
@@ -73,7 +74,9 @@ class _StartTabState extends State<StartTab> {
                   )
                 ),
               ),
-              FastAccessOptions(),
+              FastAccessOptions(
+                uid: this.widget.controller.uid
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 20),
                 child: Text(

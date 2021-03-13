@@ -72,26 +72,31 @@ class _FinancialTabState extends State<FinancialTab> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10)
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.receipt,  
-                            color: Color(0xFFf46e27),
-                            size: height * 0.045,
-                          ),
-                          Text(
-                            "Minhas faturas",
-                            style: TextStyle(
-                                color: Color(0xFF062a66),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500
+                    child: TextButton(
+                      onPressed: (){
+                        Navigator.pushNamed(context, "/bills", arguments: this.widget.controller.uid);
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.receipt,  
+                              color: Color(0xFFf46e27),
+                              size: height * 0.045,
                             ),
-                          )
-                        ],
+                            Text(
+                              "Minhas faturas",
+                              style: TextStyle(
+                                  color: Color(0xFF062a66),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
