@@ -2,11 +2,22 @@ import 'package:flutter/material.dart';
 
 class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  const RoundedAppBar({Key key, this.title = "Brisacliente"}) : super(key: key);
+  final bool hasBackIcon;
+  const RoundedAppBar({Key key, this.title = "Brisacliente", this.hasBackIcon = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return AppBar(
+      leading: this.hasBackIcon ? 
+        TextButton(
+          child: Icon(
+            Icons.keyboard_arrow_left,
+            size: width * 0.1,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ) : Container(),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(30),
