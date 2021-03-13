@@ -9,6 +9,7 @@ class HomePageController extends _HomePageControllerBase
   HomePageController(AuthController authController) {
     super._authController = authController;
     super._plansRepository = PlansRepository(_authController.user.uid);
+    super.uid = _authController.user.uid;
     super.getAddress();
     super.getPlans();
   }
@@ -17,7 +18,7 @@ class HomePageController extends _HomePageControllerBase
 abstract class _HomePageControllerBase with Store {
   AuthController _authController;
   PlansRepository _plansRepository;
-
+  String uid;
   @observable
   int index = 0;
 
