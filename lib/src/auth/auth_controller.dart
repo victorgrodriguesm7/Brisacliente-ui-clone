@@ -7,6 +7,7 @@ class AuthController = _AuthControllerBase with _$AuthController;
 
 abstract class _AuthControllerBase with Store {
   var _authRepository = AuthRepository();
+  String _cpf;
 
   @observable
   User user;
@@ -14,15 +15,18 @@ abstract class _AuthControllerBase with Store {
   @action
   setUser(User value) => user = value;
 
-  _AuthControllerBase(){
+  _AuthControllerBase() {
     _authRepository.getUser().then(setUser);
   }
-  
+
   Future loginWithEmailandPassword(email, password) async {
     user = await _authRepository.getEmailPasswordLogin(email, password);
+    _cpf = password;
   }
 
   Future logout() async {
     return _authRepository.getLogout();
   }
+
+  getCpf() => _cpf;
 }
