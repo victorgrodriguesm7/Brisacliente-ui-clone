@@ -8,20 +8,24 @@ import 'package:Brisacliente/src/pages/GuestPage.dart';
 import 'package:Brisacliente/src/pages/HomePage.dart';
 import 'package:Brisacliente/src/pages/LoginPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-  Widget initPage(BuildContext context, widget){
-      return GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: (){
-          FocusScope.of(context).requestFocus(new FocusNode());
-        },
-        child: widget
-      );
-    }
+    SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+    ]);
+    Widget initPage(BuildContext context, widget){
+        return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: (){
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          child: widget
+        );
+      }
 
     return MaterialApp(
       title: 'Brisacliente',
