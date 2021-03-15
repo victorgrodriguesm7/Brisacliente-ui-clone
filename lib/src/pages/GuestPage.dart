@@ -51,18 +51,18 @@ class _GuestPageState extends State<GuestPage> {
             Column(
               children: [
                 Observer(builder: (context){
-                  return controller.loading ? 
+                  return  controller.loading ? 
                   Padding(
-                    padding: EdgeInsets.only(bottom: height * 0.15),
+                    padding: EdgeInsets.only(bottom: height * 0.05),
                     child: SizedBox(
-                      width: 100,
-                      height: 80,
+                      width: width * 0.15,
+                      height: height * 0.05,
                       child: CircularProgressIndicator()
                     ),
                   ) : 
                   SizedBox(
-                    width: 100,
-                    height: 80,
+                    width: width * 0.15,
+                    height: height * 0.05,
                   );
                 }),
                 Row(
