@@ -40,4 +40,8 @@ abstract class _HomePageControllerBase with Store {
   @action
   Future<List<Plan>> getPlans() async =>
       plans = await _plansRepository.getPlans();
+
+  getCpf() => _authController.getCpf();
+
+  logout() async => await _authController.logout();
 }
