@@ -1,6 +1,8 @@
 import 'package:Brisacliente/src/components/FinancialTab/FinancialTab.dart';
 import 'package:Brisacliente/src/components/PlansTab/PlansTab.dart';
+import 'package:Brisacliente/src/components/ProfileTab/ProfileTab.dart';
 import 'package:Brisacliente/src/components/StartTab/StartTab.dart';
+import 'package:Brisacliente/src/components/SupportTab/SupportTab.dart';
 import 'package:Brisacliente/src/controllers/HomePageController.dart';
 import 'package:flutter/material.dart';
 
@@ -33,11 +35,11 @@ class _HomePageState extends State<HomePage> {
               FinancialTab(
                 controller: controller
               ),
-              Container(
-                color: Colors.red,
+              SupportTab(
+                controller: controller
               ),
-              Container(
-                color: Colors.blue,
+              ProfileTab(
+                controller: controller
               ),
             ],
           ),
